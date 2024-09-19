@@ -1,0 +1,23 @@
+:root {
+    font-size: calc(0.4em + 1vw);
+    
+    --primary-color: #D33F49;
+    --secondary-color: #262730;
+    --button-color: #77ba99;
+    --background-color: #EFF0D1;
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+    padding: 0px;
+    margin: 0px;
+}
+
+html {
+    font-family: monospace;
+}
+
+body {
+    background-color: var(--background-color);
+}
+
