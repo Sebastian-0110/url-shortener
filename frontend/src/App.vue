@@ -54,23 +54,27 @@
 
         <section class="features">
             <div class="feature">
-                <span>Fast</span>
-                <p>Lorem ipsum dolor sit amet consectetur</p>
+                <span class="feature-title">Fast</span>
+                <img src="./assets/bolt.svg" class="icon">
+                <p>Built using cutting-edge technology</p>
             </div>
 
             <div class="feature">
-                <span>Secure</span>
-                <p>Lorem ipsum dolor sit amet consectetur</p>
+                <span class="feature-title">Secure</span>
+                <img src="./assets/lock.svg" class="icon">
+                <p>No logs, no anything</p>
             </div>
             
             <div class="feature">
-                <span>Free</span>
-                <p>Lorem ipsum dolor sit amet consectetur</p>
+                <span class="feature-title">Free</span>
+                <img src="./assets/piggy-bank.svg" class="icon">
+                <p>Absolutely no cost, for ever</p>
             </div>
         </section>
 
         <footer class="footer">
             <p>Made with &lt;3 by Sebastian Mendoza</p>
+            <p class="small-text">Uicons by <a href="https://www.flaticon.com/uicons">Flaticon</a></p>
         </footer>
     </div>
 </template>
@@ -80,7 +84,7 @@
     .wrapper {
         display: flex;
         flex-direction: column;
-        gap: 4rem;
+        gap: 3rem;
     }
 
     .header, .footer {
@@ -96,24 +100,46 @@
     .features {
         display: flex;
         justify-content: space-around;
-        
+
         gap: 1em;
         padding: 1em;
     }
 
     .feature {
-        outline: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2em;
+
+        flex: 1;
+
         text-align: center;
-        padding: 3em 1em;
+        padding: 1em;
+    }
+
+    .feature-title {
+        font-weight: bold;
+    }
+
+    .icon {
+        max-width: 5em;
     }
 
     .footer {
+        display: flex;
+        justify-content: space-between;
+
         background-color: var(--secondary-color);
+        padding: 1em;
     }
 
-    @media (max-width: 250px) {
+    .small-text {
+        font-size: smaller;
+    }
+
+    @media (max-width: 400px) {
         .features {
-            flex-wrap: wrap;
+            flex-direction: column;
         }
     }
 </style>

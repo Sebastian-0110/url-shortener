@@ -1,33 +1,30 @@
 <script setup>
-	import axios from "axios";
+	import { postRequest } from "../logic/postRequest"
 	import { ref } from "vue";
 
 	const props = defineProps({
 		displayState: Object,
 	})
 
+	const url = ref("");
 	const shortenedUrl = defineModel({ type: String });
 
-	const url = ref("");
-	// Change this to the actual endpoint
-	const ENDPOINT = "http://localhost:5000/url/";
-
-	function submitForm() {
-		axios.post(
-			ENDPOINT, 
+	async function submitForm() {
+		const { response, error } = await postRequest(
+			"http://localhost:5000/url/", // change this to the actual endpoint
 			{ url: url.value },
 			{ headers: {'content-type': 'multipart/form-data'} }
 		)
-			.then((response) => {
-				shortenedUrl.value = response.data["shortened_url"];
-				url.value = "";
 
-				props.displayState.show("shortenedUrl");
-			})
+		if (response) {
+			shortenedUrl.value = response["shortened_url"];
+			props.displayState.show("shortenedUrl");
+			url.value = "";
+		}
 
-			.catch((error) => {
-				props.displayState.show("errorMessage");
-			});
+		if (error) {
+			props.displayState.show("errorMessage");
+		}
 	}
 </script>
 
@@ -37,8 +34,8 @@
 		<h3>Shorten your url</h3>
 
 		<div class="inputs">
-			<input type="text" name="url" id="url" class="url-input" placeholder="">
-			<input type="submit" value="Ok"> 
+			<input type="text" v-model="url" name="url" id="url" class="url-input" placeholder="">
+			<input type="submit" class="submit-button" id="submit" value="Ok" @click.prevent="submitForm"> 
 		</div>
 	</form>
 </template>
@@ -54,13 +51,24 @@
 
 	.url-input {
 		font-family: inherit;
-		max-width: 90vw;
-		padding: 0.5em;
+		
+		width: 30em;
+		max-width: 70%;
 
 		background-color: inherit;
 		border: none;
 		outline: 1px solid var(--secondary-color);
 		border-radius: 0.5em;
+	}
+
+	.inputs {
+		display: flex;
+		justify-content: center;
+		gap: 1em;
+	}
+
+	.submit-button {
+		padding: 0.5em 1.5em;
 	}
 
 </style>
