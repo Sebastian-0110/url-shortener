@@ -11,7 +11,7 @@
 
 	async function submitForm() {
 		const { response, error } = await postRequest(
-			"http://localhost:5000/url/", // change this to the actual endpoint
+			"https://urlshortener.pythonanywhere.com/url/",
 			{ url: url.value },
 			{ headers: {'content-type': 'multipart/form-data'} }
 		)

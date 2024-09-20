@@ -31,7 +31,6 @@ def close_db() -> None:
 		db.close()
 
 
-
 def query_db(query, args, one=False) -> list[sqlite3.Row] | sqlite3.Row | None:
 	""" Query the db and return the result """
 
