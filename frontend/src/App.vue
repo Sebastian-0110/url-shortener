@@ -85,6 +85,13 @@
         display: flex;
         flex-direction: column;
         gap: 3rem;
+
+        height: 100vh;
+        overflow-y: scroll;
+    }
+
+    .main, .features {
+        flex-grow: 1;
     }
 
     .header, .footer {
@@ -137,7 +144,7 @@
         font-size: smaller;
     }
 
-    @media (max-width: 400px) {
+    @media (max-width: 600px) {
         .features {
             flex-direction: column;
         }
