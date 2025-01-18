@@ -39,8 +39,7 @@ def index():
 def shorten_url():
 	""" Shorthen the url submited """
 
-	url = request.form.get("url", None)
-	
+	url = request.json.get("url", None)
 	# Validation
 	if url is None:
 		return jsonify({"error": "You must provide an url to shorten."}), 400
@@ -71,6 +70,15 @@ def shorten_url():
 	shortened_url = request.url_root + "go/" + shortened_url_code
 	return jsonify({"shortened_url": shortened_url}), 200
 
+@app.get("/details/<string:url>")
+def details(url):
+	url = db.query_db("SELECT * FROM urls WHERE original_url = ?", (url,), one=True)
+
+	if url is None:
+		return jsonify({"error": "The url doesn't exist"}), 400
+
+	shortened_url = request.url_root + "go/" + url["shortened_url_code"]
+	return jsonify({"shortened_url": shortened_url}), 200
 
 
 @app.get("/go/<string:url_code>")
