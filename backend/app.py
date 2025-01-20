@@ -1,12 +1,11 @@
-from flask import Flask, render_template, request, jsonify, redirect, url_for
+from flask import Flask, render_template, request, jsonify, redirect
 from flask_cors import CORS
 
 import string
 import random
 import re
 
-import db
-
+from backend.src import db
 
 app = Flask(
 	__name__, 
