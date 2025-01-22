@@ -5,7 +5,7 @@ import string
 import random
 import re
 
-from backend.src import db
+from backend.src import db_module as db
 
 app = Flask(
 	__name__, 

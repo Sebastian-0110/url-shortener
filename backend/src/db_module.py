@@ -2,11 +2,9 @@
 
 import sqlite3
 from flask import g
+import os
 
-
-
-DATABASE_PATH = "database.sqlite"
-
+DATABASE_PATH = os.environ["DATABASE_PATH"]
 
 def get_db() -> sqlite3.Connection:
 	""" Return an instance of a db """
@@ -43,13 +41,3 @@ def query_db(query, args, one=False) -> list[sqlite3.Row] | sqlite3.Row | None:
 		return None
 
 	return result[0] if one else result
-
-
-def close_db():
-	""" Ensure closing the db """
-
-	db = getattr(g, "_database", None)
-
-	if db is not None:
-		db.commit()
-		db.close()
