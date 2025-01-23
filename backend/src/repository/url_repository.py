@@ -7,5 +7,5 @@ class UrlRepository(ABC):
         pass
 
     @abstractmethod
-    def get_shortened_url_by_id(self, id_: int):
+    def get_shortened_url_by_uuid(self, id_: int):
         pass
