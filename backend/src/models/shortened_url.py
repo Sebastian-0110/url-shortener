@@ -3,5 +3,5 @@ import pydantic
 
 class ShortenedUrl(pydantic.BaseModel):
     uuid:  pydantic.UUID4
-    url: pydantic.HttpUrl
-    shortened_url_code: str
+    original_url: pydantic.HttpUrl
+    url_code: str
