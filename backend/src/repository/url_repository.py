@@ -1,20 +1,26 @@
 from abc import ABC, abstractmethod
 
+from backend.src.models import ShortenedUrl
+
 
 class UrlRepository(ABC):
     @abstractmethod
-    def save_shortened_url(self, url, shortened_url_code):
+    def save_shortened_url(self, url, shortened_url_code) -> ShortenedUrl:
         pass
 
     @abstractmethod
-    def get_shortened_url_by_uuid(self, id_: int):
+    def get_shortened_url_by_uuid(self, uuid_: int) -> ShortenedUrl:
         pass
 
-    def get_shortened_url_by_url_code(self, url_code):
+    @abstractmethod
+    def get_shortened_url_by_url_code(self, url_code: str) -> ShortenedUrl:
         pass
 
-    def get_shortened_url_by_original_url(self, original_url):
+    @abstractmethod
+    def get_shortened_url_by_original_url(self, original_url: str) -> ShortenedUrl:
         pass
 
-    def get_all_shortened_urls(self):
+    @abstractmethod
+    def get_all_shortened_urls(self) -> list[ShortenedUrl]:
         pass
+
