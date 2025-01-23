@@ -15,3 +15,6 @@ class UrlRepository(ABC):
 
     def get_shortened_url_by_original_url(self, original_url):
         pass
+
+    def get_all_shortened_urls(self):
+        pass
