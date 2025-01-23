@@ -2,20 +2,12 @@ import sqlite3
 
 
 class SchemaCreator:
-    def __init__(self, database_path):
-        self.database_path = database_path
-        self.connection: sqlite3.Connection | None = None
+    def __init__(self, connection: sqlite3.Connection):
+        self.connection = connection
 
     def create_schema(self):
-        try:
-            self._connect_to_database()
-            self._create_shortened_urls_table()
-            self._commit_changes()
-        finally:
-            self._close_connection()
-
-    def _connect_to_database(self):
-        self.connection = sqlite3.connect(self.database_path)
+        self._create_shortened_urls_table()
+        self._commit_changes()
 
     def _create_shortened_urls_table(self):
         self.connection.execute("""
@@ -29,7 +21,3 @@ class SchemaCreator:
 
     def _commit_changes(self):
         self.connection.commit()
-
-    def _close_connection(self):
-        self.connection.close()
-
