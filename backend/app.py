@@ -4,8 +4,10 @@ from flask_cors import CORS
 import string
 import random
 import re
+import os
 
 from backend.src import db_module as db
+from backend.src.db.schema import SchemaCreator
 
 app = Flask(
 	__name__, 
@@ -15,6 +17,9 @@ app = Flask(
 
 CORS(app)
 
+DATABASE_PATH = os.environ["DATABASE_PATH"]
+schema_creator = SchemaCreator(DATABASE_PATH)
+schema_creator.create_schema()
 
 URL_VALIDATION_REGEX = re.compile(
         r'^https?://'  # http:// or https://
