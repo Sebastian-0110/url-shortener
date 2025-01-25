@@ -1,46 +1,65 @@
-from typing import Callable
 import sqlite3
 import uuid
 
-from .url_repository import UrlRepository
+from backend.src.repository.url_repository import UrlRepository
+from backend.src.models import ShortenedUrl
 
+
+class ShortenedUrlNotFound(Exception):
+    pass
 
 class UrlRepositorySQLite(UrlRepository):
-    def __init__(self, database_path: str):
-        self.database_path: str = database_path
-        self.connection: sqlite3.Connection
+    def __init__(self, connection: sqlite3.Connection):
+        self.connection = connection
 
-    def save_shortened_url(self, url, shortened_url_code):
-        def sql_executing_function():
-            self.connection.execute(
-                "INSERT INTO urls (uuid, original_url, shortened_url_code) VALUES (?, ?, ?)",
-                (uuid.uuid4(), url, shortened_url_code)
-            )
-        self._execute(sql_executing_function)
-
-    def get_shortened_url_by_id(self, id_: int):
-        def sql_executing_function():
-            return self.connection.execute(
-                "SELECT * FROM urls WHERE id = ?",
-                (id_, )
-            ).fetchone()
-        self._execute(sql_executing_function)
-
-    def _execute(self, sql_executing_function: Callable):
+    def save(self, original_url: str, url_code: str) -> ShortenedUrl:
         try:
-            self._connect_to_database()
-            result = sql_executing_function()
-            self._commit_changes()
-            return result
-        finally:
-            self._close_connection()
+            return self.get_by_original_url(original_url)
+        except ShortenedUrlNotFound:
+            return self._save_new_url(original_url, url_code)
 
-    def _connect_to_database(self):
-        self.connection = sqlite3.connect(self.database_path)
-        self.connection.row_factory = sqlite3.Row
+    def _save_new_url(self, original_url: str, url_code: str):
+        uuid_ = str(uuid.uuid4())
 
-    def _commit_changes(self):
-        self.connection.commit()
+        self.connection.execute(
+            "INSERT INTO urls (uuid, original_url, url_code) VALUES (?, ?, ?)",
+            (uuid_, original_url, url_code)
+        )
 
-    def _close_connection(self):
-        self.connection.close()
+        return ShortenedUrl(uuid=uuid_, original_url=original_url, url_code=url_code)
+
+    def get_by_uuid(self, uuid_: str) -> ShortenedUrl:
+        return self._get_or_raise_not_found(
+            "SELECT * FROM urls WHERE uuid = ?",
+            (uuid_, )
+        )
+
+
+    def get_by_original_url(self, original_url: str) -> ShortenedUrl:
+        return self._get_or_raise_not_found(
+            "SELECT * FROM urls WHERE original_url = ?",
+            (original_url, )
+        )
+
+    def get_by_url_code(self, url_code: str) -> ShortenedUrl:
+        return self._get_or_raise_not_found(
+            "SELECT * FROM urls WHERE url_code = ?",
+            (url_code, ),
+        )
+
+    def _get_or_raise_not_found(self, query: str, params: tuple):
+        result = self.connection.execute(query, params).fetchone()
+
+        try:
+            return ShortenedUrl(**result)
+        except TypeError:
+            raise ShortenedUrlNotFound()
+
+    def get_all(self) -> list[ShortenedUrl]:
+        urls = self.connection.execute("""
+            SELECT * FROM urls
+        """).fetchall()
+
+        return list(map(lambda url: ShortenedUrl(**url), urls))
+
+
