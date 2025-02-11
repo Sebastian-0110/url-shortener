@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-from backend.src.models import ShortenedUrl
+from backend.app.models import ShortenedUrl
 
 
 class UrlRepository(ABC):

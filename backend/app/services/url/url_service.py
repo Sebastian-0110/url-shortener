@@ -1,8 +1,8 @@
 from typing import Callable
 from pydantic import TypeAdapter, HttpUrl, ValidationError
 
-from backend.src.repository.url_repository import UrlRepository
-from backend.src.services.code_generator.code_generator import CodeGeneratorService
+from backend.app.repository.url_repository import UrlRepository
+from backend.app.services.code_generator.code_generator import CodeGeneratorService
 
 
 class InvalidUrlException(Exception):

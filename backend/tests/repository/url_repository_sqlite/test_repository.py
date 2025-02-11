@@ -1,7 +1,7 @@
 import unittest
 import uuid
 
-from backend.src.models import ShortenedUrl
+from backend.app.models import ShortenedUrl
 from .test_setup import UrlRepositorySQLiteTestSetup
 
 

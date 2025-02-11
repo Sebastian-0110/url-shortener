@@ -1,8 +1,8 @@
 import unittest
 import sqlite3
 
-from backend.src.db import SchemaCreator
-from backend.src.repository.url_repository_sqlite import UrlRepositorySQLite
+from backend.app.db import SchemaCreator
+from backend.app.repository.url_repository_sqlite import UrlRepositorySQLite
 
 
 class UrlRepositorySQLiteTestSetup(unittest.TestCase):

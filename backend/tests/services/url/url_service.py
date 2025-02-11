@@ -2,10 +2,10 @@ from unittest.mock import MagicMock, create_autospec
 import unittest
 import uuid
 
-from backend.src.repository.url_repository_sqlite import UrlRepositorySQLite
-from backend.src.services.code_generator import RandomCodeGeneratorService
-from backend.src.services.url import UrlService
-from backend.src.models import ShortenedUrl
+from backend.app.repository.url_repository_sqlite import UrlRepositorySQLite
+from backend.app.services.code_generator import RandomCodeGeneratorService
+from backend.app.services.url import UrlService
+from backend.app.models import ShortenedUrl
 
 
 class TestUrlService(unittest.TestCase):

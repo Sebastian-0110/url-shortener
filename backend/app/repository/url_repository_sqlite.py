@@ -1,8 +1,8 @@
 import sqlite3
 import uuid
 
-from backend.src.repository.url_repository import UrlRepository
-from backend.src.models import ShortenedUrl
+from backend.app.repository.url_repository import UrlRepository
+from backend.app.models import ShortenedUrl
 
 
 class ShortenedUrlNotFound(Exception):

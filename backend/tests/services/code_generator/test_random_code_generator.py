@@ -1,6 +1,6 @@
 import unittest
 
-from backend.src.services.code_generator import RandomCodeGeneratorService
+from backend.app.services.code_generator import RandomCodeGeneratorService
 
 
 class TestRandomCodeGeneratorService(unittest.TestCase):
