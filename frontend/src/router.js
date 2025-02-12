@@ -4,8 +4,8 @@ import HomeView from "./components/HomeView.vue";
 import UrlDetailsView from "./components/UrlDetailsView.vue";
 
 const routes = [
-	{ path: "/", component: HomeView },
-	{ path: "/details/:url_code", component: UrlDetailsView },
+	{ name: "home", path: "/", component: HomeView },
+	{ name: "details", path: "/details/:url_code", component: UrlDetailsView },
 ];
 
 const router = createRouter({
