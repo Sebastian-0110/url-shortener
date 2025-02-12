@@ -25,6 +25,7 @@ class UrlRepositorySQLite(UrlRepository):
             "INSERT INTO urls (uuid, original_url, url_code) VALUES (?, ?, ?)",
             (uuid_, original_url, url_code)
         )
+        self.connection.commit()
 
         return ShortenedUrl(uuid=uuid_, original_url=original_url, url_code=url_code)
 
