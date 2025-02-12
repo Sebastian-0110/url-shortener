@@ -6,8 +6,7 @@ import random
 import re
 import os
 
-from backend.app import db_module as db
-from backend.app.db import create_schema
+from backend.app.db import create_schema, db
 
 app = Flask(
 	__name__, 
