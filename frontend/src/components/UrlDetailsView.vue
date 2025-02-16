@@ -8,7 +8,7 @@
     const originalUrl = ref("");
     const urlCode = ref("");
 
-    const shortenedUrl = computed(() => `${location.host}/${urlCode.value}`);
+    const shortenedUrl = computed(() => `${location.origin}/${urlCode.value}`);
 
     watch(() => route.params.uuid, async () => {
         const response = await fetch(
