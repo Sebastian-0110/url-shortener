@@ -38,7 +38,7 @@
 
         <div class="row justify-content-center gy-2">
             <div class="col col-12 col-sm-6">
-                <input class="form-control form-control-lg" :value="shortenedUrl" />
+                <input class="form-control form-control-lg" :value="shortenedUrl" readonly />
             </div>
 
             <div class="col col-12 col-sm-auto">
