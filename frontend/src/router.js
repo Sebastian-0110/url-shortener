@@ -5,7 +5,7 @@ import UrlDetailsView from "./components/UrlDetailsView.vue";
 
 const routes = [
 	{ name: "home", path: "/", component: HomeView },
-	{ name: "details", path: "/details/:uuid", component: UrlDetailsView },
+	{ name: "details", path: "/details/:urlCode", component: UrlDetailsView },
 ];
 
 const router = createRouter({
