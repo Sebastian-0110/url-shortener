@@ -29,12 +29,27 @@
 </script>
 
 <template>
-	<div class="container">
-        <p>Original url: {{ originalUrl }}</p>
-        <p>Shortened url: {{ shortenedUrl }}</p>
+	<div class="container pt-5 text-center">
+        <div class="row mb-3">
+            <h3>Your shortened url:</h3>
+        </div>
+
+        <div class="row justify-content-center gy-2">
+            <div class="col col-12 col-sm-6">
+                <input class="form-control form-control-lg" :value="shortenedUrl" />
+            </div>
+
+            <div class="col col-12 col-sm-auto">
+                <button class="btn btn-primary btn-lg w-100">Copy</button>
+            </div>
+        </div>
+
+        <div>
+            <p class="form-text mt-2 mb-5">This url takes you to: {{ originalUrl }}</p>
+        </div>
 
         <RouterLink to="/">
-            <button class="btn btn-primary">Go back</button>
+            <button class="btn btn-primary btn-lg">Go back</button>
         </RouterLink>
 	</div>
 </template>
