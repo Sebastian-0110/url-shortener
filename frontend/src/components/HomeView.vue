@@ -2,24 +2,30 @@
     import { ref } from "vue";
     import { useRouter } from "vue-router";
     import endpoint from "@/api/endpoint.js";
+    import {push} from "notivue";
 
     const url = ref("");
     const router = useRouter();
 
     async function submitForm() {
+        if (url.value === "") {
+            return push.warning("Please enter a valid url");
+        }
+
         const result = await fetch(endpoint("/urls/"), {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ url: url.value })
         });
+        const data = await result.json();
 
-        if (result.ok) {
-            const data = await result.json();
-            await router.push({
-                name: "details",
-                params: { urlCode: data["url_code"] }
-            });
-        }
+        if (!result.ok)
+            return push.error(data.error)
+
+        await router.push({
+            name: "details",
+            params: { urlCode: data["url_code"] }
+        });
     }
 </script>
 
@@ -39,6 +45,7 @@
                         id="url"
                         placeholder="Your url here"
                         class="form-control form-control-lg"
+                        required
                     >
                 </div>
 
