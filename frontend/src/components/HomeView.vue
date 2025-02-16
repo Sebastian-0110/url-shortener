@@ -24,7 +24,7 @@
 </script>
 
 <template>
-	<form action="/" method="post" class="d-flex flex-column align-items-center gap-3">
+	<form action="/" method="post" class="d-flex flex-column align-items-center gap-3 pt-5">
 		<div class="container">
             <div class="row mb-4">
                 <h3 class="text-center">Shorten your url</h3>
