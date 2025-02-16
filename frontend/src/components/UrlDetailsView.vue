@@ -24,7 +24,9 @@
         }
     }, { immediate: true });
 
-
+    async function copyToClipboard() {
+        await navigator.clipboard.writeText(shortenedUrl.value);
+    }
 
 </script>
 
@@ -40,7 +42,7 @@
             </div>
 
             <div class="col col-12 col-sm-auto">
-                <button class="btn btn-primary btn-lg w-100">Copy</button>
+                <button class="btn btn-primary btn-lg w-100" @click="copyToClipboard">Copy</button>
             </div>
         </div>
 
