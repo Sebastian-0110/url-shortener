@@ -1,6 +1,7 @@
 <script setup>
     import {ref, watch, computed} from "vue";
     import { useRoute } from "vue-router";
+    import { push } from "notivue";
     import endpoint from "@/api/endpoint.js";
 
     const route = useRoute();
@@ -26,6 +27,7 @@
 
     async function copyToClipboard() {
         await navigator.clipboard.writeText(shortenedUrl.value);
+        push.success("Copied to the clipboard")
     }
 
 </script>

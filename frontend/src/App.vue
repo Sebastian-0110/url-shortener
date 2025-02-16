@@ -1,4 +1,6 @@
 <script setup>
+    import { Notivue, Notification, slateTheme } from 'notivue'
+
     import Header from "./components/Header.vue";
     import Footer from "./components/Footer.vue";
 </script>
@@ -13,6 +15,10 @@
 
         <Footer />
     </div>
+
+    <Notivue v-slot="item">
+        <Notification :item="item" :theme="slateTheme" />
+    </Notivue>
 </template>
 
 <style scoped>
