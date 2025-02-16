@@ -1,14 +1,25 @@
 <script setup>
     import { ref } from "vue";
+    import { useRouter } from "vue-router";
+    import endpoint from "@/api/endpoint.js";
 
     const url = ref("");
+    const router = useRouter();
 
-    function submitForm() {
-        fetch("http://localhost:5000/url/", {
+    async function submitForm() {
+        const result = await fetch(endpoint("/urls/"), {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({ url: url.value })
-        })
+        });
+
+        if (result.ok) {
+            const data = await result.json();
+            await router.push({
+                name: "details",
+                params: { urlCode: data["url_code"] }
+            });
+        }
     }
 </script>
 
