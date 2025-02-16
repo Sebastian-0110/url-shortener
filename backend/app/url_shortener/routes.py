@@ -1,4 +1,5 @@
 from flask import request, jsonify, redirect
+import uuid
 
 from . import url_shortener
 from backend.app.services.url.url_service import InvalidUrlException
@@ -20,22 +21,11 @@ def create():
         return jsonify({"error": e.message}), 400
 
 
-@url_shortener.get("/<string:url_code>/")
-def go(url_code):
+@url_shortener.get("/<string:url_code>/details")
+def details(url_code):
     try:
         repository = get_url_repository()
         shortened_url = repository.get_by_url_code(url_code)
-        return redirect(str(shortened_url.original_url),301)
-
-    except ShortenedUrlNotFound as e:
-        return jsonify({"error": "Not found"}), 404
-
-
-@url_shortener.get("/<uuid:uuid>/details")
-def details(uuid):
-    try:
-        repository = get_url_repository()
-        shortened_url = repository.get_by_uuid(str(uuid))
         return jsonify(shortened_url.model_dump(mode="json")), 200
 
     except ShortenedUrlNotFound as e:
