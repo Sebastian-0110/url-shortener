@@ -15,7 +15,12 @@ def create():
     try:
         service = get_url_service()
         shortened_url = service.save(url)
-        return jsonify(shortened_url.model_dump(mode="json")), 200
+
+        response = jsonify(shortened_url.model_dump(mode="json"))
+        response.status_code = 201
+        response.headers["location"] = f"/{shortened_url.url_code}"
+
+        return response
 
     except InvalidUrlException as e:
         return jsonify({"error": e.message}), 400
