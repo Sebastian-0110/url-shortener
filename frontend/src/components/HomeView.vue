@@ -38,7 +38,7 @@
                         name="url"
                         id="url"
                         placeholder="Your url here"
-                        class="form-control"
+                        class="form-control form-control-lg"
                     >
                 </div>
 
@@ -48,7 +48,7 @@
                         id="submit"
                         value="Send"
                         @click.prevent="submitForm"
-                        class="btn btn-primary w-100"
+                        class="btn btn-primary btn-lg w-100"
                     >
                 </div>
             </div>
