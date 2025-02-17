@@ -18,7 +18,7 @@
 
         if (!response.ok) {
             push.error(data.error);
-            await router.push({ name: "home" });
+            return await router.push({ name: "home" });
         }
 
         window.location.href = data["original_url"];
