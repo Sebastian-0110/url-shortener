@@ -1,5 +1,4 @@
 from flask import request, jsonify, redirect
-import uuid
 
 from . import url_shortener
 from backend.app.services.url.url_service import InvalidUrlException
