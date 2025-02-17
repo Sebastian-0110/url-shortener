@@ -3,11 +3,8 @@ import uuid
 
 from backend.app.repository.url_repository import UrlRepository
 from backend.app.models import ShortenedUrl
+from backend.app.exceptions import ShortenedUrlNotFound
 
-
-class ShortenedUrlNotFound(Exception):
-    message = "We couldn't find that url"
-    status_code = 404
 
 class UrlRepositorySQLite(UrlRepository):
     def __init__(self, connection: sqlite3.Connection):

@@ -1,5 +1,5 @@
 from .url_repository import UrlRepository
-from .url_repository_sqlite import UrlRepositorySQLite, ShortenedUrlNotFound
+from .url_repository_sqlite import UrlRepositorySQLite
 from backend.app.db import get_db
 
 

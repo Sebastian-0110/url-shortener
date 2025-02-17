@@ -1,6 +1,6 @@
 import uuid
 
-from backend.app.repository.url_repository_sqlite import ShortenedUrlNotFound
+from backend.app.exceptions import ShortenedUrlNotFound
 from backend.app.models import ShortenedUrl
 from .test_setup import UrlRepositorySQLiteTestSetup
 
