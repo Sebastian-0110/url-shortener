@@ -1,10 +1,9 @@
 from flask import request, jsonify, redirect
 
 from . import url_shortener
-from backend.app.services.url.url_service import InvalidUrlException
 from backend.app.services.url import get_url_service
 from backend.app.repository import get_url_repository
-from backend.app.exceptions import ShortenedUrlNotFound
+from backend.app.exceptions import ShortenedUrlNotFound, InvalidUrlException
 
 
 @url_shortener.post("/")

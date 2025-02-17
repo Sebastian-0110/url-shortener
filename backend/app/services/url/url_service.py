@@ -3,11 +3,7 @@ from pydantic import TypeAdapter, HttpUrl, ValidationError
 
 from backend.app.repository.url_repository import UrlRepository
 from backend.app.services.code_generator.code_generator import CodeGeneratorService
-
-
-class InvalidUrlException(Exception):
-    message = "The introduced url is invalid"
-    status_code = 400
+from backend.app.exceptions import InvalidUrlException
 
 
 class UrlService:
