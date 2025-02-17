@@ -1,9 +1,11 @@
 """ Module to manage db access (querying and inserting data) """
 
-import sqlite3
+from dotenv import load_dotenv
 from flask import g
+import sqlite3
 import os
 
+load_dotenv()
 DATABASE_PATH = os.environ["DATABASE_PATH"]
 
 def get_db() -> sqlite3.Connection:
