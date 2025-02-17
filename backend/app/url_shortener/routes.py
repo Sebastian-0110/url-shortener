@@ -22,7 +22,7 @@ def create():
         return response
 
     except InvalidUrlException as e:
-        return jsonify({"error": e.message}), 400
+        return jsonify({"error": e.message}), e.status_code
 
 
 @url_shortener.get("/<string:url_code>/details")
