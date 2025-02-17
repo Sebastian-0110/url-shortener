@@ -33,4 +33,4 @@ def details(url_code):
         return jsonify(shortened_url.model_dump(mode="json")), 200
 
     except ShortenedUrlNotFound as e:
-        return jsonify({"error": "Not found"}), 404
+        return jsonify({ "error": e.message }), e.status_code

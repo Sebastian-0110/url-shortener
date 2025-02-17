@@ -6,7 +6,8 @@ from backend.app.models import ShortenedUrl
 
 
 class ShortenedUrlNotFound(Exception):
-    pass
+    message = "We couldn't find that url"
+    status_code = 404
 
 class UrlRepositorySQLite(UrlRepository):
     def __init__(self, connection: sqlite3.Connection):
